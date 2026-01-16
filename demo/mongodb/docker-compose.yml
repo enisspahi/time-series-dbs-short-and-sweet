@@ -1,0 +1,27 @@
+services:
+  mongo-primary:
+    image: mongodb/mongodb-community-server:7.0-ubuntu2204
+    container_name: mongo-primary
+    hostname: mongo-primary
+    command: --dbpath /data/db
+    ports:
+      - "27017:27017"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: admin
+      MONGODB_INITDB_ROOT_PASSWORD: admin_pass
+      MONGODB_INITDB_DATABASE: smart-meters
+    volumes:
+      - mongo_primary_data:/data/db
+    healthcheck:
+      test: mongosh --quiet --eval "db.adminCommand({ping:1})" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+
+volumes:
+  mongo_primary_data:

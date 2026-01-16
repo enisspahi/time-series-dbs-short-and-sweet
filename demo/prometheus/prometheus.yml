@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'smart-meters'
+    static_configs:
+      - targets: ['readings-exporter:8000']

@@ -42,7 +42,7 @@ EOF
 ##### Simulate full day readings
 ````bash
 for device in {1..10}; do
-  START_TIME=$(date -j -f '%Y-%m-%d %H:%M:%S' '2026-01-15 00:15:00' +%s)
+  START_TIME=$(date -j -f '%Y-%m-%d %H:%M:%S' '2026-01-23 00:15:00' +%s)
   for i in {0..95}; do
     TIMESTAMP=$((START_TIME + i * 900))
     # Generate random value between 0.8 and 1.2
@@ -65,7 +65,7 @@ curl -X POST "http://localhost:8086/api/v2/query?org=openvalue" \
   -H "Authorization: Token admintoken" \
   -H "Content-Type: application/vnd.flux" \
   --data 'from(bucket: "smart-meters")
-    |> range(start: 2026-01-15T00:15:00+01:00, stop: 2026-01-16T00:00:00+01:00)
+    |> range(start: 2026-01-23T00:15:00+01:00, stop: 2026-01-24T00:00:00+01:00)
     |> filter(fn: (r) => r._measurement == "readings")
     |> filter(fn: (r) => r.device_id == "1")
     |> sort(columns: ["_time"])'
@@ -78,7 +78,7 @@ curl -X POST "http://localhost:8086/api/v2/query?org=openvalue" \
   -H "Authorization: Token admintoken" \
   -H "Content-Type: application/vnd.flux" \
   --data 'from(bucket: "smart-meters")
-    |> range(start: 2026-01-15T00:15:00+01:00, stop: 2026-01-16T00:00:00+01:00)
+    |> range(start: 2026-01-23T00:15:00+01:00, stop: 2026-01-24T00:00:00+01:00)
     |> filter(fn: (r) => r._measurement == "readings")
     |> filter(fn: (r) => r.device_id == "1")
     |> aggregateWindow(every: 1h, fn: sum)'

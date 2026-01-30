@@ -35,7 +35,7 @@ Readings Exporter (Python) → Updates readings every 1 minute
 ## Functional Analysis
 
 ### Ingestion
-> Every 15 minute scrapes are ingestions
+> Every scrape is an ingestion
 
 ### Backfills
 > No backfills

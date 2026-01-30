@@ -18,7 +18,7 @@ style: |
   }  
 ---
 
-# Timeseries Databases
+# Processing Time Series Data
 
 ## Short and Sweet
 
@@ -45,7 +45,7 @@ Is a sequence of data collected at regular time intervals to track changes over 
 
 ---
 
-# Time Series Data - Aggregations
+# Time Series Data - Model over time
 
 ![w:850px](images/cassandra_sunset-buckets.drawio.svg)
 
@@ -76,8 +76,9 @@ Is a sequence of data collected at regular time intervals to track changes over 
 
 # Time Series Databases - Features
 
-- Time-range aggregations / Automatic Downsampling
-- Querying recent data
+- Time-range queries
+- Time-range aggregations / windowing functions
+- Automatic Downsampling
 - Analytics on historical data
 - Joining with metadata
 - Data retention, archival, compression
@@ -186,10 +187,9 @@ Flexible JSON-like NoSQL databases.
 
 ```
 {
-"meter_id": "SM001",
-"timestamp": "2025-10-06T00:00:00Z",
-"kWh": 12.5,
-"metadata": { "voltage": 220 }
+  "timestamp": "2025-10-06T00:00:00Z",
+  "metadata": { "device": "SM001" },
+  "value_kWh": 12.5
 }
 ```
 
